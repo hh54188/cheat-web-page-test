@@ -1,7 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {HotTable} from '@handsontable/react';
 import Skeleton from 'react-loading-skeleton';
+import ttiPolyfill from 'tti-polyfill';
 import './App.css';
+
+ttiPolyfill.getFirstConsistentlyInteractive().then((tti) => {
+  console.log('tti------>', tti);
+});
 
 function App() {
   const [data, setState] = useState([]);
