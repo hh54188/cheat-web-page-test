@@ -11,8 +11,12 @@ ttiPolyfill.getFirstConsistentlyInteractive().then((tti) => {
 function App() {
   const [data, setState] = useState([]);
   useEffect(() => {
-    const longRequest = fetch(`https://httpstat.us/200?sleep=${1000 * 5}`);
-    const shortRequest = fetch('https://randomuser.me/api/').then(response => response.json());
+    const longRequest = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve([]);
+      }, 1000 * 5)
+    });
+    const shortRequest = Promise.resolve([]);
 
     Promise.all([longRequest, shortRequest]).then(([longRequestResponse, shortRequestResponse]) => {
       console.log(longRequestResponse, shortRequestResponse);
